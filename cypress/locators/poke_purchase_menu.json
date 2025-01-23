@@ -1,0 +1,7 @@
+{
+	"card_number": ".pay__payform-v2 > :nth-child(2) > .pay_base-input-v2",
+	"card_actual": ":nth-child(1) > .pay_base-input-v2",
+	"card_cvv": ".pay-inputs-box > :nth-child(2) > .pay_base-input-v2",
+	"card_name": ".pay__input-box-last-of > .pay_base-input-v2",
+	"pay_button": ".pay-btn"
+}

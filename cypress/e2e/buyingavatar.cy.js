@@ -1,33 +1,35 @@
-function getRandomNumber() {
-	return Math.floor(Math.random() * 12) + 1;
-}
+// npx cypress run --spec cypress/e2e/buyingavatar.cy.js --browser chrome
+import * as data from '../helpers/default_data.json';
+import * as poke_auth from '../locators/poke.auth.json';
+import * as poke_main_page from '../locators/poke.main_page.json';
+import * as poke_purchase_page from '../locators/poke_purchase_menu.json';
+import * as poke_purchase_confirm_page from '../locators/poke_purchase_confirm.json';
+import * as poke_success_page from '../locators/poke.success_page.json';
 
 describe('Покупка нового аватара', function () {
 	it('Покупка нового аватара', function () {
-		cy.visit('https://pokemonbattle.ru/login');
+		cy.visit(poke_auth.url);
 		// AUTH
-		cy.get(':nth-child(1) > .auth__input').type('andyonline1989@gmail.com');
-		cy.get('#password').type('ABC123');
-		cy.get('.auth__button').click();
+		cy.get(poke_auth.login).type(data.login);
+		cy.get(poke_auth.password).type(data.password);
+		cy.get(poke_auth.auth_button).click();
 		// FOUND AVATAR
-		cy.get('.header__container > .header__id').click();
-		cy.get('[href="/shop"]').click();
-		// GENERATOR OF RANDOM NUMBER
-		const randomIndex = getRandomNumber();
-		cy.get(`:nth-child(${randomIndex}) > .shop__button`).click();
+		cy.get(poke_main_page.trainer_menu).click();
+		cy.get(poke_main_page.change_avatar_button).click();
+		cy.get(poke_main_page.avatar_card).first().click();
 		// PURCHASE MENU
-		cy.get('.pay__payform-v2 > :nth-child(2) > .pay_base-input-v2').type('4111111111111111');
-		cy.get(':nth-child(1) > .pay_base-input-v2').type('10/25');
-		cy.get('.pay-inputs-box > :nth-child(2) > .pay_base-input-v2').type('125');
-		cy.get('.pay__input-box-last-of > .pay_base-input-v2').type('german dolnikov');
-		cy.get('.pay-btn').click();
+		cy.get(poke_purchase_page.card_number).type(data.card_number);
+		cy.get(poke_purchase_page.card_actual).type(data.card_actual);
+		cy.get(poke_purchase_page.card_cvv).type(data.card_cvv);
+		cy.get(poke_purchase_page.card_name).type(data.card_name);
+		cy.get(poke_purchase_page.pay_button).click();
 		// PURCHASE CONFIRMATION
-		cy.get('#cardnumber').type('56456');
-		cy.get('.payment__submit-button').click();
+		cy.get(poke_purchase_confirm_page.secure_code).type(data.secure_code);
+		cy.get(poke_purchase_confirm_page.submit_button).click();
 		cy.wait(4000);
 		// BACK TO MAIN MENU
-		cy.get('.payment__adv').click();
+		cy.get(poke_success_page.back_main_page_button).click();
 		// LOG OUT TO MAIN STATE'
-		cy.get('.top_menu_exit').click();
+		cy.get(poke_main_page.logout_button).click();
 	});
 });

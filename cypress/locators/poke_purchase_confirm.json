@@ -1,0 +1,4 @@
+{
+	"secure_code": "#cardnumber",
+	"submit_button": ".payment__submit-button"
+}

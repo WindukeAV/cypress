@@ -1,0 +1,6 @@
+{
+	"url": "https://pokemonbattle.ru/login",
+	"login": ":nth-child(1) > .auth__input",
+	"password": "#password",
+	"auth_button": ".auth__button"
+}

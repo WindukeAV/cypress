@@ -1,0 +1,6 @@
+{
+	"trainer_menu": ".header__container > .header__id",
+	"change_avatar_button": "[href='/shop']",
+	"avatar_card": ".available > button",
+	"logout_button": ".top_menu_exit"
+}
